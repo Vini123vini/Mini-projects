@@ -1,0 +1,36 @@
+def login(self, username, password):
+    # Find and fill the username and password fields
+    username_field = self.driver.find_element_by_name('username')
+    password_field = self.driver.find_element_by_name('password')
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    # Click the login button
+    login_button = self.driver.find_element_by_xpath('//button[@type="submit"]')
+    login_button.click()
+
+    # Handle pop-up boxes
+    sleep(1)
+    not_now_button = self.driver.find_element_by_xpath('//button[text()="Not Now"]')
+    not_now_button.click()
+    sleep(1)
+    not_now_button = self.driver.find_element_by_xpath('//button[text()="Not Now"]')
+    not_now_button.click()
+
+def send_message(self, user, message):
+    # Click the message button
+    message_button = self.driver.find_element_by_xpath('//a[contains(@href, "/direct/")]')
+    message_button.click()
+
+    # Search for the user
+    search_box = self.driver.find_element_by_xpath('//input[@placeholder="Search"]')
+    search_box.send_keys(user['username'])
+    sleep(1)
+    user_button = self.driver.find_element_by_xpath(f'//a[contains(@href, "/{user["username"]}/")][1]')
+    user_button.click()
+
+    # Send the message
+    message_box = self.driver.find_element_by_xpath('//textarea[@placeholder="Message..."]')
+    message_box.send_keys(message)
+    send_button = self.driver.find_element_by_xpath('//button[text()="Send"]')
+    send_button.click()￼Enter
